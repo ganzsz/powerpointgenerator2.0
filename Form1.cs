@@ -227,6 +227,17 @@ namespace PowerpointGenerater2
                 Opslaan_Op_Locatie(GetWorkingFile(), TempLiturgiePath);
                 //maak een instantie van powerpoint
                 PowerpointFunctions ppf = new PowerpointFunctions(this);
+                parser parser = new parser(this, richTextBox1.Text);
+                if (!parser.parse())
+                {
+                    MessageBox.Show("hanserror");
+                    parser.ClosePPS();
+                }
+                else
+                {
+
+                }
+                    
                 #region creeer lijst van liturgie
                 //liturgie die is opgegeven en uitgelezen
                 List<Uitlezen_Liturgie> Liturgielezer = new List<Uitlezen_Liturgie>();

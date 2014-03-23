@@ -145,5 +145,15 @@ namespace PowerpointGenerater2
         {
             return string.Format("databasepad: {0}\n templateliederen: {1}\n templatetheme: {2}\n regels per slide: {3}\n", Databasepad, Templateliederen, Templatetheme, regelsperslide);
         }
+
+        internal string getMask(string p)
+        {
+            foreach(Mapmask m in this.lijstmasks)
+            {
+                if (m.RealName == p)
+                    return m.Name;
+            }
+            return p;
+        }
     }
 }
