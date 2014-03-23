@@ -6,7 +6,7 @@ using System.Linq;
 using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Core;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     class PowerpointFunctions
     {
@@ -27,6 +27,7 @@ namespace PowerpointGenerater
 
         public PowerpointFunctions(Form1 hoofdformulier)
         {
+            System.Diagnostics.Debug.Print(hoofdformulier.instellingen.Databasepad);
             if (File.Exists(hoofdformulier.instellingen.Templatetheme))
             {
                 //Creeer een nieuwe lege presentatie volgens een bepaald thema

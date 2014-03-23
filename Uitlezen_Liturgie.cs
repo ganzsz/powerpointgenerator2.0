@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     class Uitlezen_Liturgie
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     public class Instellingen
     {

@@ -1,4 +1,4 @@
-﻿namespace PowerpointGenerater
+﻿namespace PowerpointGenerater2
 {
     public class Mapmask
     {

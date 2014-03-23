@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     public partial class Instellingenform : Form
     {

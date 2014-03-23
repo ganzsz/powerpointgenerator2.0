@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     public partial class Form1 : Form
     {
@@ -304,7 +304,7 @@ namespace PowerpointGenerater
         #region Algemene functies
 
         /// <summary>
-        /// Uitlezen van een file die gekozen word aan de hand van openfiledialog
+        /// Uitlezen van een file dat gekozen word aan de hand van openfiledialog
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -1,4 +1,4 @@
-﻿namespace PowerpointGenerater
+﻿namespace PowerpointGenerater2
 {
     partial class LiturgieNotFoundFormulier
     {

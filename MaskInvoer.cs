@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace PowerpointGenerater
+namespace PowerpointGenerater2
 {
     public partial class MaskInvoer : Form
     {

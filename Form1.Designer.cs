@@ -1,4 +1,4 @@
-﻿namespace PowerpointGenerater
+﻿namespace PowerpointGenerater2
 {
     partial class Form1
     {
@@ -46,6 +46,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.optiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bekijkDatabaseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopPowerpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.templatesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.invoerenMasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
@@ -64,7 +65,6 @@
             this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox5 = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.stopPowerpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -209,6 +209,13 @@
             this.bekijkDatabaseToolStripMenuItem1.Size = new System.Drawing.Size(162, 22);
             this.bekijkDatabaseToolStripMenuItem1.Text = "Bekijk Database";
             this.bekijkDatabaseToolStripMenuItem1.Click += new System.EventHandler(this.bekijkDatabaseToolStripMenuItem1_Click);
+            // 
+            // stopPowerpointToolStripMenuItem
+            // 
+            this.stopPowerpointToolStripMenuItem.Name = "stopPowerpointToolStripMenuItem";
+            this.stopPowerpointToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.stopPowerpointToolStripMenuItem.Text = "Stop powerpoint";
+            this.stopPowerpointToolStripMenuItem.Click += new System.EventHandler(this.stopPowerpointToolStripMenuItem_Click);
             // 
             // templatesToolStripMenuItem1
             // 
@@ -365,13 +372,6 @@
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "Liturgie:";
-            // 
-            // stopPowerpointToolStripMenuItem
-            // 
-            this.stopPowerpointToolStripMenuItem.Name = "stopPowerpointToolStripMenuItem";
-            this.stopPowerpointToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.stopPowerpointToolStripMenuItem.Text = "Stop powerpoint";
-            this.stopPowerpointToolStripMenuItem.Click += new System.EventHandler(this.stopPowerpointToolStripMenuItem_Click);
             // 
             // Form1
             // 
