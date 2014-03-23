@@ -174,6 +174,7 @@ namespace PowerpointGenerater2
                 instellingen.Templateliederen = formulier.textBox1.Text;
                 instellingen.Templatetheme = formulier.textBox2.Text;
                 instellingen.Databasepad = formulier.textBox3.Text;
+                instellingen.TemplateAbeeldingLied = formulier.textBox5.Text;
                 bool result = System.Int32.TryParse(formulier.textBox4.Text, out instellingen.regelsperslide);
                 if (!result)
                 {
@@ -235,63 +236,62 @@ namespace PowerpointGenerater2
                 }
                 else
                 {
-
-                }
-                    
-                #region creeer lijst van liturgie
-                //liturgie die is opgegeven en uitgelezen
-                List<Uitlezen_Liturgie> Liturgielezer = new List<Uitlezen_Liturgie>();
-                //lege lijst voor liturgie maken
-                Liturgielezer.Clear();
-                //lees liturgie voor liturgie uit
-                for (int i = 0; i < richTextBox1.Lines.Count(); i++)
-                {
-                    //als een regel liturgie bevat
-                    if (!richTextBox1.Lines[i].Equals(""))
+                    #region creeer lijst van liturgie
+                   /* //liturgie die is opgegeven en uitgelezen
+                    List<Uitlezen_Liturgie> Liturgielezer = new List<Uitlezen_Liturgie>();
+                    //lege lijst voor liturgie maken
+                    Liturgielezer.Clear();
+                    //lees liturgie voor liturgie uit
+                    for (int i = 0; i < richTextBox1.Lines.Count(); i++)
                     {
-                        //creeer een plek om de opgehaalde liturgie op te gaan slaan
-                        Liturgielezer.Add(new Uitlezen_Liturgie());
-                        //creeer mappaden van de meegegeven liturgieregel
-                        List<String> liturgie = Liturgielezer[i].ParseInputToPaths(richTextBox1.Lines[i], instellingen.Databasepad, instellingen.GetMasks());
-                        //lees de bijbehorende bestanden uit
-                        Liturgielezer[i].LeesLiturgie(liturgie);
-
-                        //als niet alle liturgie is gevonden geven we een melding of de gebruiker toch door wil gaan met genereren
-                        if (!Liturgielezer[i].AllLiturgieFound)
+                        //als een regel liturgie bevat
+                        if (!richTextBox1.Lines[i].Equals(""))
                         {
-                            int bestandsnamencounter = 0;
-                            string melding = Liturgielezer[i].mappath;
-                            //zoek de juiste bestandsnaam op
-                            foreach (String tempstring in Liturgielezer[i].bestandsnamen)
+                            //creeer een plek om de opgehaalde liturgie op te gaan slaan
+                            Liturgielezer.Add(new Uitlezen_Liturgie());
+                            //creeer mappaden van de meegegeven liturgieregel
+                            List<String> liturgie = Liturgielezer[i].ParseInputToPaths(richTextBox1.Lines[i], instellingen.Databasepad, instellingen.GetMasks());
+                            //lees de bijbehorende bestanden uit
+                            Liturgielezer[i].LeesLiturgie(liturgie);
+
+                            //als niet alle liturgie is gevonden geven we een melding of de gebruiker toch door wil gaan met genereren
+                            if (!Liturgielezer[i].AllLiturgieFound)
                             {
-                                melding += tempstring + " ";
-                                bestandsnamencounter++;
-                            }
-                            LiturgieNotFoundFormulier errorformulier = new LiturgieNotFoundFormulier(melding);
-                            if (errorformulier.ShowDialog() == DialogResult.Cancel)
-                            {
-                                ppf.ClosePPS();
-                                return;
+                                int bestandsnamencounter = 0;
+                                string melding = Liturgielezer[i].mappath;
+                                //zoek de juiste bestandsnaam op
+                                foreach (String tempstring in Liturgielezer[i].bestandsnamen)
+                                {
+                                    melding += tempstring + " ";
+                                    bestandsnamencounter++;
+                                }
+                                LiturgieNotFoundFormulier errorformulier = new LiturgieNotFoundFormulier(melding);
+                                if (errorformulier.ShowDialog() == DialogResult.Cancel)
+                                {
+                                    ppf.ClosePPS();
+                                    return;
+                                }
                             }
                         }
                     }
-                }
-                #endregion creeer lijst van liturgie
-                progressBar1.Visible = true;
-                progressBar1.Value = 0;
-                progressBar1.Minimum = 0;
-                progressBar1.Maximum = richTextBox1.Lines.Count();
-                progressBar1.Step = 1;
+                    */
+                    #endregion creeer lijst van liturgie
+                    progressBar1.Visible = true;
+                    progressBar1.Value = 0;
+                    progressBar1.Minimum = 0;
+                    progressBar1.Maximum = richTextBox1.Lines.Count();
+                    progressBar1.Step = 1;
 
-                button1.Text = "Stop";
-                Thread t = new Thread(this.CheckProgress);
-                t.IsBackground = true;
-                t.Start();
-                ppf.InputGeneratePresentation(Liturgielezer, instellingen.Templateliederen, textBox2.Text, textBox3.Text, textBox4.Text, textBox1.Text, textBox5.Text);
-                GenerateThread = new Thread(ppf.GeneratePresentation);
-                GenerateThread.IsBackground = true;
-                //genereer de presentatie
-                GenerateThread.Start();
+                    button1.Text = "Stop";
+                    Thread t = new Thread(this.CheckProgress);
+                    t.IsBackground = true;
+                    t.Start();
+                    //ppf.InputGeneratePresentation(Liturgielezer, instellingen.Templateliederen, textBox2.Text, textBox3.Text, textBox4.Text, textBox1.Text, textBox5.Text);
+                    GenerateThread = new Thread(parser.createPresentation);
+                    GenerateThread.IsBackground = true;
+                    //genereer de presentatie
+                    GenerateThread.Start();
+                }
             }
             else
             {
@@ -557,5 +557,10 @@ namespace PowerpointGenerater2
                 File.Delete(TempLiturgiePath);
         }
         #endregion functies
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

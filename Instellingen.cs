@@ -11,6 +11,7 @@ namespace PowerpointGenerater2
         public string Templatetheme;
         public int regelsperslide = 6;
         private List<Mapmask> lijstmasks = new List<Mapmask>();
+        public string TemplateAbeeldingLied;
 
         public Instellingen()
             : this("", "", "",6)
@@ -67,6 +68,9 @@ namespace PowerpointGenerater2
                         xw.WriteEndElement();
                         xw.WriteStartElement("RegelsperSlide");
                             xw.WriteString(instellingen.regelsperslide.ToString());
+                        xw.WriteEndElement();
+                        xw.WriteStartElement("AfbeeldingLied");
+                            xw.WriteString(instellingen.TemplateAbeeldingLied.ToString());
                         xw.WriteEndElement();
                     xw.WriteEndElement();
                 xw.WriteEndDocument();
@@ -137,7 +141,10 @@ namespace PowerpointGenerater2
                 if (!result)
                     instellingen.regelsperslide = 6;
             }
-
+            nodelist = root.GetElementsByTagName("AfbeeldingLied");
+            foreach (XmlNode item in nodelist)
+                instellingen.TemplateAbeeldingLied = item.InnerText;
+            
             return instellingen;
         }
 
@@ -155,5 +162,7 @@ namespace PowerpointGenerater2
             }
             return p;
         }
+
+
     }
 }

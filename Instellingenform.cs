@@ -13,6 +13,7 @@ namespace PowerpointGenerater2
             textBox2.Text = formulier.instellingen.Templatetheme;
             textBox3.Text = formulier.instellingen.Databasepad;
             textBox4.Text = formulier.instellingen.regelsperslide.ToString();
+            textBox5.Text = formulier.instellingen.TemplateAbeeldingLied;
             hoofdformulier = formulier;
         }
 
@@ -65,5 +66,14 @@ namespace PowerpointGenerater2
             return openFileDialog1.FileName;
         }
         #endregion Functions
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //kies een bestand en sla het pad op
+            String temp = KiesFile();
+            if (!temp.Equals(""))
+                textBox5.Text = temp;
+        }
+
     }
 }

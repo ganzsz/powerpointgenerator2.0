@@ -18,10 +18,11 @@ namespace PowerpointGenerater2
         public string[] bordregel = new string[3];
         private Form1 papa;
         public bool isLied = false;
+        public bool eenvers = false;
 
-        private string psalm;
-        private List<int> verzen = new List<int>();
-        private string presentatiepad = "";
+        public string psalmmap;
+        public List<int> verzen = new List<int>();
+        public string presentatiepad = "";
 
         public LiturgieItem(string regel, Form1 pa)
         {
@@ -39,7 +40,7 @@ namespace PowerpointGenerater2
                 string psalmmap = papa.instellingen.Databasepad + @"\" + onderdelen[0] + @"\" + onderdelen[1].ToLower();
                 if (Directory.Exists(psalmmap))
                 {
-                    this.psalm = psalmmap;
+                    this.psalmmap = psalmmap;
                     this.isLied = true;
                     if (onderdelen.Count > 2)
                     {
@@ -73,6 +74,8 @@ namespace PowerpointGenerater2
                             else
                                 break;
                         }
+                        if (verzen.Count == 1)
+                            eenvers = true;
                     }
                 }
                 else
@@ -97,7 +100,9 @@ namespace PowerpointGenerater2
                 if (onderdelen.Count() > 2)
                     this.Aansluitend += ": " + bordregel[2];
                 this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
-                 
+                this.Titel = papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
+                if(!eenvers)
+                    this.Titel += ": ";
             }
             else
             #endregion
