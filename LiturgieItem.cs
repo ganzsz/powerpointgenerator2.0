@@ -99,7 +99,7 @@ namespace PowerpointGenerater2
                 this.Aansluitend="Aansluitend: "+papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (onderdelen.Count() > 2)
                     this.Aansluitend += ": " + bordregel[2];
-                this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
+                //this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
                 this.Titel = papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if(!eenvers)
                     this.Titel += ": ";
@@ -116,7 +116,10 @@ namespace PowerpointGenerater2
                     this.isValid = false;
             }
             if (!this.isValid)
+            {
                 MessageBox.Show('"' + regel + "\" is niet gevonden.");
+                return;
+            }
         }
     }
 }

@@ -227,7 +227,7 @@ namespace PowerpointGenerater2
                 //sla een back up voor als er iets fout gaat
                 Opslaan_Op_Locatie(GetWorkingFile(), TempLiturgiePath);
                 //maak een instantie van powerpoint
-                PowerpointFunctions ppf = new PowerpointFunctions(this);
+                //PowerpointFunctions ppf = new PowerpointFunctions(this);
                 parser parser = new parser(this, richTextBox1.Text);
                 if (!parser.parse())
                 {

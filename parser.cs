@@ -49,6 +49,65 @@ namespace PowerpointGenerater2
 
         }
 
+        /// <summary>
+        /// Puts images in presentation
+        /// </summary>
+        /// <param name="presentatie">A liedAfbeelding template presentation</param>
+        /// <param name="regel">The LiturgieItem that is being worked with</param>
+        /// <param name="r">The counter in this.items</param>
+        /// <param name="q">The verses position</param>
+        /// <param name="i">The actual verse number</param>
+        /// <param name="v">The image that is put in the presentation</param>
+        /// <returns>The presentation but with the images</returns>
+        public _Presentation liedAfbeeldingPresentatie(_Presentation presentatie, LiturgieItem regel, int r, int q, int i, int v)
+        {
+            foreach (Slide slide in presentatie.Slides)
+            {
+                foreach (Microsoft.Office.Interop.PowerPoint.Shape shape in slide.Shapes)
+                {
+                    if (shape.Type == MsoShapeType.msoTextBox)
+                    {
+                        switch (shape.TextFrame.TextRange.Text)
+                        {
+                            case "<Liturgieregel>":
+                                shape.TextFrame.TextRange.Text = regel.Titel;
+                                if (!regel.eenvers)
+                                {
+                                    for (int j = q; j < regel.verzen.Count; j++)
+                                    {
+                                        shape.TextFrame.TextRange.Text += regel.verzen[j] + ", ";
+                                    }
+                                    shape.TextFrame.TextRange.Text = shape.TextFrame.TextRange.Text.Remove(shape.TextFrame.TextRange.Text.Length - 2);
+                                }
+                                break;
+                            case "<Volgende>":
+                                if (r < this.items.Count - 1 && q == regel.verzen.Count - 1)
+                                    shape.TextFrame.TextRange.Text = this.items[(r + 1)].Aansluitend;
+                                else
+                                    shape.TextFrame.TextRange.Text = "";
+                                break;
+                            case "<liedafbeelding>":
+                                if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
+                                    {
+                                        slide.Shapes.AddPicture(regel.psalmmap + '\\' + i + @"-" + v + ".gif", MsoTriState.msoFalse, MsoTriState.msoTrue, shape.Left, shape.Top, shape.Width, shape.Height);
+                                        shape.TextFrame.TextRange.Text = "";
+                                        shape.Width = 0.0001f;
+                                        shape.Height = 0.0001f;
+                                        shape.Left = -1;
+                                    }
+                                    else
+                                        break;
+                                break;
+                            case "<Inhoud>":
+                                break;
+                        }
+                    }
+                }
+
+            }
+            return presentatie;
+        }
+
         public void createPresentation()
         {
             if (this.objApp == null)
@@ -61,22 +120,38 @@ namespace PowerpointGenerater2
                 {
                     for (int q = 0; q < regel.verzen.Count; q++)
                     {
-
                         _Presentation presentatie;
                         int i = regel.verzen[q];
                         if (File.Exists(regel.psalmmap + '\\' + i + @"-1.gif"))
                         {
-                            if (File.Exists(papa.instellingen.TemplateAbeeldingLied))
-                                presentatie = OpenPPS(papa.instellingen.TemplateAbeeldingLied);
-                            else
+                            for (int v = 1; v < 100; v++)
                             {
-                                MessageBox.Show("het pad naar de liedafbeeldingtemplate is niet gezet");
-                                ClosePPS();
-                                return;
+                                if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
+                                {
+                                    if (File.Exists(papa.instellingen.TemplateAbeeldingLied))
+                                    {
+                                        presentatie = OpenPPS(papa.instellingen.TemplateAbeeldingLied);
+                                        presentatie = this.liedAfbeeldingPresentatie(presentatie, regel, r, q, i, v);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("het pad naar de liedafbeeldingtemplate is niet gezet");
+                                        ClosePPS();
+                                        return;
+                                    }
+                                    VoegSlideinPresentatiein(presentatie.Slides);
+                                    //sluit de template weer af
+                                    presentatie.Close();
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                         }
                         else
                         {
+                            List<string> versregels = new List<string>();
                             if (File.Exists(papa.instellingen.Templateliederen))
                                 presentatie = OpenPPS(papa.instellingen.Templateliederen);
                             else
@@ -85,63 +160,18 @@ namespace PowerpointGenerater2
                                 ClosePPS();
                                 return;
                             }
-                        }
-                        foreach (Slide slide in presentatie.Slides)
-                        {
-                            foreach (Microsoft.Office.Interop.PowerPoint.Shape shape in slide.Shapes)
-                            {
-                                if (shape.Type == MsoShapeType.msoTextBox)
-                                {
-                                    switch (shape.TextFrame.TextRange.Text)
-                                    {
-                                        case "<Liturgieregel>":
-                                            shape.TextFrame.TextRange.Text = regel.Titel;
-                                            if (!regel.eenvers)
-                                            {
-                                                for (int j = q; j < regel.verzen.Count; j++)
-                                                {
-                                                    shape.TextFrame.TextRange.Text += regel.verzen[j] + ", ";
-                                                }
-                                                shape.TextFrame.TextRange.Text = shape.TextFrame.TextRange.Text.Remove(shape.TextFrame.TextRange.Text.Length - 2);
-                                            }
-                                            break;
-                                        case "<Volgende>":
-                                            if (r < this.items.Count - 2)
-                                                shape.TextFrame.TextRange.Text = this.items[(r + 1)].Aansluitend;
-                                            else
-                                                shape.TextFrame.TextRange.Text = "";
-                                            break;
-                                        case "<liedafbeelding>":
-                                            if (File.Exists(regel.psalmmap + '\\' + i + @"-1.gif"))
-                                            {
-                                                for (int v = 1; v < 100; v++)
-                                                {
-                                                    if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
-                                                    {
-                                                        slide.Shapes.AddPicture(regel.psalmmap + '\\' + i + @"-" + v + ".gif", MsoTriState.msoFalse, MsoTriState.msoTrue, shape.Left, shape.Top, shape.Width, shape.Height);
-                                                        shape.TextFrame.TextRange.Text = "";
-                                                        shape.Width = 0.0001f;
-                                                        shape.Height = 0.0001f;
-                                                        shape.Left = -1;
-                                                        shape.Top = -1;
-                                                    }
-                                                    else
-                                                        break;
-                                                }
-                                            }
-                                            break;
-                                    }
-                                }
-                            }
+                            VoegSlideinPresentatiein(presentatie.Slides);
+                            //sluit de template weer af
+                            presentatie.Close();
                         }
 
                     }
                 }
-                else
-                {
-
-                }
+                papa.progressBar1.PerformStep();
             }
+            System.Diagnostics.Debug.WriteLine("hallo klaar");
+            papa.autoEvent.Set();
+            objApp.WindowState = PpWindowState.ppWindowMaximized;
             return;
         }
         #endregion hans
