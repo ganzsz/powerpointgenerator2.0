@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Masks>
+  <Mask>
+    <Name>Ps.</Name>
+    <RealName>psalm</RealName>
+  </Mask>
+  <Mask>
+    <Name>GK</Name>
+    <RealName>gezang</RealName>
+  </Mask>
+  <Mask>
+    <Name>LB</Name>
+    <RealName>lied</RealName>
+  </Mask>
+</Masks>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration>
+	<runtime>
+		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+			<dependentAssembly>
+				<assemblyIdentity name="office" publicKeyToken="71E9BCE111E9429C" culture="neutral"/>
+			</dependentAssembly>
+		</assemblyBinding>
+	</runtime>
+</configuration>
