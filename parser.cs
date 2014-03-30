@@ -215,6 +215,13 @@ namespace PowerpointGenerater2
                                 {
                                     //return de liturgie
                                     versregels = rdr.ReadToEnd().Split('\n');
+                                    string vv="";
+                                    foreach(string tv in versregels)
+                                    {
+                                        if (tv != "") 
+                                            vv += tv + "\n";
+                                    }
+                                    versregels = vv.Split('\n');
                                     bool urn = true;
                                     int c = 0;
                                     while (urn)
