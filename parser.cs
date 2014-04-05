@@ -202,6 +202,7 @@ namespace PowerpointGenerater2
                         }
                         #endregion liedafbeelding
                         #region liedtekst
+                            //TODO fix eeuwig laatste vers
                         else
                         {
                             string[] versregels;
@@ -218,7 +219,7 @@ namespace PowerpointGenerater2
                                     string vv="";
                                     foreach(string tv in versregels)
                                     {
-                                        if (tv != "") 
+                                        if (tv != "" && tv != "\r") 
                                             vv += tv + "\n";
                                     }
                                     versregels = vv.Split('\n');
@@ -231,9 +232,18 @@ namespace PowerpointGenerater2
                                         {
                                             if (((c * papa.instellingen.regelsperslide) + d) < versregels.Count())
                                             {
-                                                if (versregels[((c * papa.instellingen.regelsperslide) + d)] != "\r")
+                                                if (versregels[((c * papa.instellingen.regelsperslide) + d)] != "\r"
+                                                    && versregels[((c * papa.instellingen.regelsperslide) + d)] != "")
                                                 {
                                                     regels += versregels[((c * papa.instellingen.regelsperslide) + d)];
+                                                    if (d == (papa.instellingen.regelsperslide - 1))
+                                                    {
+                                                        if (regels.EndsWith("\r"))
+                                                        {
+                                                            regels = regels.Remove(regels.Count()-1);
+                                                        }
+                                                        regels += ">>";
+                                                    }
                                                 }
                                                 
                                             }
@@ -257,10 +267,11 @@ namespace PowerpointGenerater2
                                         VoegSlideinPresentatiein(presentatie.Slides);
                                         //sluit de template weer af
                                         presentatie.Close();
+                                        c++;
                                     }
 
 
-                                    c++;
+                                    
                                 }
                             }
                             //vang errors af en geef een melding dat er iets is fout gegaan
