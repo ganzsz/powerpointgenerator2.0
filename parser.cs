@@ -139,7 +139,7 @@ namespace PowerpointGenerater2
                             case "<liedafbeelding>":
                                 if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
                                 {
-                                    slide.Shapes.AddPicture(regel.psalmmap + '\\' + i + @"-" + v + ".gif", MsoTriState.msoFalse, MsoTriState.msoTrue, shape.Left, shape.Top, shape.Width, shape.Height);
+                                    slide.Shapes.AddPicture(regel.psalmmap + '\\' + i + @"-" + v + ".gif", MsoTriState.msoFalse, MsoTriState.msoTrue, shape.TextFrame.TextRange.BoundLeft, shape.Top, shape.Width, shape.Height);
                                     shape.TextFrame.TextRange.Text = "";
                                     shape.Width = 0.0001f;
                                     shape.Height = 0.0001f;

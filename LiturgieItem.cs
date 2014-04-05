@@ -58,7 +58,7 @@ namespace PowerpointGenerater2
                             }
                             else
                             {
-                                if (File.Exists(psalmmap + @"\" + vers + @".txt") || File.Exists(psalmmap + @"\" + vers + @".gif"))
+                                if (File.Exists(psalmmap + @"\" + vers + @".txt") || File.Exists(psalmmap + @"\" + vers + @"-1.gif"))
                                     verzen.Add(Int32.Parse(vers));
                                 else
                                     this.isValid = false;
