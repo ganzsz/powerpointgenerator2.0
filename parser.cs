@@ -41,14 +41,99 @@ namespace PowerpointGenerater2
                     LiturgieItem a = new LiturgieItem(this.liturgie[i], papa);
                     if (a.isValid)
                         this.items.Add(a);
-                    ok = ok && items.Last().isValid;
+                    ok = ok && a.isValid;
                 }
             }
             this.items.Reverse();
             return ok;
 
         }
-        
+
+        /// <summary>
+        /// Just a normal presentation
+        /// </summary>
+        /// <param name="presentatie">The presentation to parse</param>
+        /// <param name="regel">Liturgie regel we're working with</param>
+        /// <param name="r">counter in this.items</param>
+        /// <returns>The parsed presentation</returns>
+        private _Presentation normalPresentation(_Presentation presentatie, LiturgieItem regel, int r)
+        {
+            foreach (Slide slide in presentatie.Slides)
+            {
+                foreach (Microsoft.Office.Interop.PowerPoint.Shape shape in slide.Shapes)
+                {
+                    if (shape.Type == MsoShapeType.msoTextBox)
+                    {
+                        switch (shape.TextFrame.TextRange.Text.ToLower())
+                        {
+                            case "<lezen>":
+                                shape.TextFrame.TextRange.Text = regel.Titel;
+                                break;
+                            case "<tekst>":
+                                shape.TextFrame.TextRange.Text = regel.Titel;
+                                break;
+                            case "<volgende>":
+                                if (r < this.items.Count() - 1)
+                                    shape.TextFrame.TextRange.Text = this.items[r + 1].Aansluitend;
+                                else
+                                    shape.TextFrame.TextRange.Text = "";
+                                break;
+                            case "<1e collecte:>":
+                                shape.TextFrame.TextRange.Text = "1e Collecte: " + papa.textBox3.Text;
+                                break;
+                            case "<2e collecte:>":
+                                shape.TextFrame.TextRange.Text = "2e Collecte: " + papa.textBox4.Text;
+                                break;
+                            case "<voorganger:>":
+                                shape.TextFrame.TextRange.Text = "Voorganger: " + papa.textBox2.Text;
+                                break;
+                        }
+                    }
+                    else if (shape.Type == MsoShapeType.msoTable)
+                    {
+                        if (shape.Table.Rows[1].Cells[1].Shape.TextFrame.TextRange.Text.ToLower().Equals("<liturgie>"))
+                        {
+                            shape.Table.Rows[1].Cells[2].Shape.TextFrame.TextRange.Text = "Liturgie";
+                            items.Reverse();
+                            bool eerste=true;
+                            foreach (LiturgieItem t in items)
+                            {
+                                if (t.bordje)
+                                {
+                                    if (eerste)
+                                    {
+                                        eerste = false;
+                                    }
+                                    else
+                                    {
+                                        shape.Table.Rows.Add(2);
+                                    }
+                                    shape.Table.Rows[2].Cells[1].Shape.TextFrame.TextRange.Text = t.bordregel[0];
+                                    shape.Table.Rows[2].Cells[2].Shape.TextFrame.TextRange.Text = t.bordregel[1];
+                                    shape.Table.Rows[2].Cells[3].Shape.TextFrame.TextRange.Text = t.bordregel[2];
+                                }
+                            }
+                            if (!papa.textBox5.Text.Equals(""))
+                            {
+                                if(!papa.textBox2.TabIndex.Equals(""))
+                                {
+                                    shape.Table.Rows.Add(shape.Table.Rows.Count);
+                                    shape.Table.Rows[shape.Table.Rows.Count-1].Cells[1].Shape.TextFrame.TextRange.Text = "L " + papa.textBox1.Text;
+                                }
+                                shape.Table.Rows[shape.Table.Rows.Count].Cells[1].Shape.TextFrame.TextRange.Text = "T "+papa.textBox5.Text;
+                            }
+                            else if (!papa.textBox1.Text.Equals(""))
+                            {
+                                shape.Table.Rows[shape.Table.Rows.Count].Cells[1].Shape.TextFrame.TextRange.Text = "L " + papa.textBox1.Text;
+                            }
+                            items.Reverse();
+                        }
+                    }
+                }
+            }
+            return presentatie;
+        }
+
         /// <summary>
         /// Puts songtext
         /// </summary>
@@ -202,7 +287,7 @@ namespace PowerpointGenerater2
                         }
                         #endregion liedafbeelding
                         #region liedtekst
-                            //TODO fix eeuwig laatste vers
+                        //TODO fix eeuwig laatste vers
                         else
                         {
                             string[] versregels;
@@ -216,10 +301,10 @@ namespace PowerpointGenerater2
                                 {
                                     //return de liturgie
                                     versregels = rdr.ReadToEnd().Split('\n');
-                                    string vv="";
-                                    foreach(string tv in versregels)
+                                    string vv = "";
+                                    foreach (string tv in versregels)
                                     {
-                                        if (tv != "" && tv != "\r") 
+                                        if (tv != "" && tv != "\r")
                                             vv += tv + "\n";
                                     }
                                     versregels = vv.Split('\n');
@@ -240,12 +325,12 @@ namespace PowerpointGenerater2
                                                     {
                                                         if (regels.EndsWith("\r"))
                                                         {
-                                                            regels = regels.Remove(regels.Count()-1);
+                                                            regels = regels.Remove(regels.Count() - 1);
                                                         }
                                                         regels += ">>";
                                                     }
                                                 }
-                                                
+
                                             }
                                             else
                                             {
@@ -271,7 +356,7 @@ namespace PowerpointGenerater2
                                     }
 
 
-                                    
+
                                 }
                             }
                             //vang errors af en geef een melding dat er iets is fout gegaan
@@ -287,6 +372,13 @@ namespace PowerpointGenerater2
 
                     }
                 }
+                else
+                {
+                    _Presentation presentatie = OpenPPS(regel.presentatiepad);
+                    presentatie = this.normalPresentation(presentatie, regel, r);
+                    VoegSlideinPresentatiein(presentatie.Slides);
+                    presentatie.Close();
+                }
                 papa.progressBar1.PerformStep();
             }
             System.Diagnostics.Debug.WriteLine("hallo klaar");
@@ -294,6 +386,8 @@ namespace PowerpointGenerater2
             objApp.WindowState = PpWindowState.ppWindowMaximized;
             return;
         }
+
+        
         #endregion hans
         #region oud
         private Microsoft.Office.Interop.PowerPoint.Application objApp;

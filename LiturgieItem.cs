@@ -35,7 +35,7 @@ namespace PowerpointGenerater2
                     onderdelen.Add(s);
             }
             #region Zang
-            if (onderdelen.Count()>1)
+            if (onderdelen.Count() > 1 && onderdelen[0].ToLower() != "lezen" && onderdelen[0].ToLower() != "tekst")
             {
                 string psalmmap = papa.instellingen.Databasepad + @"\" + onderdelen[0] + @"\" + onderdelen[1].ToLower();
                 if (Directory.Exists(psalmmap))
@@ -51,7 +51,7 @@ namespace PowerpointGenerater2
                                 for (int i = Int32.Parse(vers.Split('-')[0]); i <= Int32.Parse(vers.Split('-')[vers.Split('-').Count() - 1]); i++)
                                 {
                                     if (File.Exists(psalmmap + @"\" + i + @".txt") || File.Exists(psalmmap + @"\" + i + @".gif"))
-                                        verzen.Add(i); 
+                                        verzen.Add(i);
                                     else
                                         this.isValid = false;
                                 }
@@ -82,7 +82,7 @@ namespace PowerpointGenerater2
                 {
                     this.isValid = false;
                 }
-                
+
                 this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
                 if (onderdelen.Count() > 2)
@@ -96,24 +96,63 @@ namespace PowerpointGenerater2
                     this.bordregel[2] = "";
                 }
 
-                this.Aansluitend="Aansluitend: "+papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
+                this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (onderdelen.Count() > 2)
                     this.Aansluitend += ": " + bordregel[2];
                 //this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
                 this.Titel = papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
-                if(!eenvers)
+                if (!eenvers)
                     this.Titel += ": ";
             }
             else
             #endregion
             {
-                System.Diagnostics.Debug.WriteLine(papa.instellingen.Databasepad + @"\" + regel + @".pptx");
-                if (File.Exists(papa.instellingen.Databasepad + @"\" + regel + @".pptx"))
+                System.Diagnostics.Debug.WriteLine(papa.instellingen.Databasepad + @"\" + onderdelen[0] + @".pptx");
+                if (File.Exists(papa.instellingen.Databasepad + @"\" + onderdelen[0] + @".pptx"))
                 {
-                    this.presentatiepad = papa.instellingen.Databasepad + @"\" + regel.ToLower() + @".pptx";
+                    this.presentatiepad = papa.instellingen.Databasepad + @"\" + onderdelen[0].ToLower() + @".pptx";
+                    #region lezen
+                    if (onderdelen[0].ToLower() == "lezen" || onderdelen[0].ToLower() == "tekst")
+                    {
+                        RichTextBox el;
+                        if (onderdelen[0].ToLower() == "lezen")
+                        {
+                            el = papa.textBox1;
+                        }
+                        else
+                        {
+                            el = papa.textBox5;
+                        }
+                        if (onderdelen.Count() > 1)
+                        {
+                            int regelnummer = Int32.Parse(onderdelen[1]);
+
+                            if (regelnummer <= el.Lines.Count() && regelnummer > 0)
+                            {
+                                this.Titel = el.Lines[regelnummer-1];
+                                this.Aansluitend = papa.instellingen.getMask(onderdelen[0]) + " " + this.Titel;
+                            }
+                            else
+                            {
+                                this.Titel = el.Text;
+                                this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                            }
+                        }
+                        else
+                        {
+                            this.Titel = el.Text;
+                            this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                        }
+                    }
+                    #endregion lezen;
+                    else
+                    {
+                        this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                    }
                 }
                 else
                     this.isValid = false;
+
             }
             if (!this.isValid)
             {

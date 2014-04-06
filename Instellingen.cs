@@ -157,7 +157,7 @@ namespace PowerpointGenerater2
         {
             foreach(Mapmask m in this.lijstmasks)
             {
-                if (m.RealName == p)
+                if (m.RealName.ToLower() == p.ToLower())
                     return m.Name;
             }
             return p;

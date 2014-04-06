@@ -236,46 +236,7 @@ namespace PowerpointGenerater2
                 }
                 else
                 {
-                    #region creeer lijst van liturgie
-                   /* //liturgie die is opgegeven en uitgelezen
-                    List<Uitlezen_Liturgie> Liturgielezer = new List<Uitlezen_Liturgie>();
-                    //lege lijst voor liturgie maken
-                    Liturgielezer.Clear();
-                    //lees liturgie voor liturgie uit
-                    for (int i = 0; i < richTextBox1.Lines.Count(); i++)
-                    {
-                        //als een regel liturgie bevat
-                        if (!richTextBox1.Lines[i].Equals(""))
-                        {
-                            //creeer een plek om de opgehaalde liturgie op te gaan slaan
-                            Liturgielezer.Add(new Uitlezen_Liturgie());
-                            //creeer mappaden van de meegegeven liturgieregel
-                            List<String> liturgie = Liturgielezer[i].ParseInputToPaths(richTextBox1.Lines[i], instellingen.Databasepad, instellingen.GetMasks());
-                            //lees de bijbehorende bestanden uit
-                            Liturgielezer[i].LeesLiturgie(liturgie);
-
-                            //als niet alle liturgie is gevonden geven we een melding of de gebruiker toch door wil gaan met genereren
-                            if (!Liturgielezer[i].AllLiturgieFound)
-                            {
-                                int bestandsnamencounter = 0;
-                                string melding = Liturgielezer[i].mappath;
-                                //zoek de juiste bestandsnaam op
-                                foreach (String tempstring in Liturgielezer[i].bestandsnamen)
-                                {
-                                    melding += tempstring + " ";
-                                    bestandsnamencounter++;
-                                }
-                                LiturgieNotFoundFormulier errorformulier = new LiturgieNotFoundFormulier(melding);
-                                if (errorformulier.ShowDialog() == DialogResult.Cancel)
-                                {
-                                    ppf.ClosePPS();
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                    */
-                    #endregion creeer lijst van liturgie
+                    
                     progressBar1.Visible = true;
                     progressBar1.Value = 0;
                     progressBar1.Minimum = 0;

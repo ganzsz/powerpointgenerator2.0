@@ -28,37 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lblBuild = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // lblBuild
             // 
-            this.pictureBox1.Image = global::PowerpointGenerater2.Properties.Resources.visitekaartje;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(672, 385);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.lblBuild.Location = new System.Drawing.Point(49, 332);
+            this.lblBuild.Name = "lblBuild";
+            this.lblBuild.Size = new System.Drawing.Size(532, 23);
+            this.lblBuild.TabIndex = 0;
+            this.lblBuild.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Contactform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 384);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblBuild);
             this.MaximumSize = new System.Drawing.Size(687, 422);
             this.MinimumSize = new System.Drawing.Size(687, 422);
             this.Name = "Contactform";
             this.ShowIcon = false;
             this.Text = "Visitekaartje";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.Contactform_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblBuild;
+
     }
 }
