@@ -130,24 +130,24 @@ namespace PowerpointGenerater2
                             if (regelnummer <= el.Lines.Count() && regelnummer > 0)
                             {
                                 this.Titel = el.Lines[regelnummer-1];
-                                this.Aansluitend = papa.instellingen.getMask(onderdelen[0]) + " " + this.Titel;
+                                this.Aansluitend = "Aansluitend: "+papa.instellingen.getMask(onderdelen[0]) + ": " + this.Titel;
                             }
                             else
                             {
                                 this.Titel = el.Text;
-                                this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                                this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
                             }
                         }
                         else
                         {
                             this.Titel = el.Text;
-                            this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                            this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
                         }
                     }
                     #endregion lezen;
                     else
                     {
-                        this.Aansluitend = papa.instellingen.getMask(onderdelen[0]);
+                        this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
                     }
                 }
                 else
