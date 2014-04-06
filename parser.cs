@@ -111,6 +111,7 @@ namespace PowerpointGenerater2
                                     shape.Table.Rows[2].Cells[1].Shape.TextFrame.TextRange.Text = t.bordregel[0];
                                     shape.Table.Rows[2].Cells[2].Shape.TextFrame.TextRange.Text = t.bordregel[1];
                                     shape.Table.Rows[2].Cells[3].Shape.TextFrame.TextRange.Text = t.bordregel[2];
+                                    shape.Table.Rows[2].Cells[4].Shape.TextFrame.TextRange.Text = t.bordregel[3];
                                 }
                             }
                             if (!papa.textBox5.Text.Equals(""))

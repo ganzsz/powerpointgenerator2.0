@@ -15,7 +15,7 @@ namespace PowerpointGenerater2
         public bool isValid = true;
 
         public bool bordje = false;
-        public string[] bordregel = new string[3];
+        public string[] bordregel = new string[4];
         private Form1 papa;
         public bool isLied = false;
         public bool eenvers = false;
@@ -87,18 +87,20 @@ namespace PowerpointGenerater2
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
                 if (onderdelen.Count() > 2)
                 {
-                    this.bordregel[1] = onderdelen[1] + ":";
-                    this.bordregel[2] = onderdelen[2];
+                    this.bordregel[1] = onderdelen[1];
+                    this.bordregel[2] = ":";
+                    this.bordregel[3] = onderdelen[2];
                 }
                 else
                 {
                     this.bordregel[1] = onderdelen[1];
                     this.bordregel[2] = "";
+                    this.bordregel[3] = "";
                 }
 
                 this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (onderdelen.Count() > 2)
-                    this.Aansluitend += ": " + bordregel[2];
+                    this.Aansluitend += ": " + bordregel[3];
                 //this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
                 this.Titel = papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (!eenvers)
