@@ -180,9 +180,9 @@ namespace PowerpointGenerater2
                 {
                     instellingen.regelsperslide = 6;
                 }
-
+                instellingen.dubbelePuntKolom = formulier.checkBox1.Checked;
                 if (!Instellingen.WriteXML(instellingen, ProgramDirectory))
-                    MessageBox.Show("Niet opgeslagen wegens te lang pad");
+                    MessageBox.Show("Error, oeps");
             }
         }
         private void bekijkDatabaseToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -518,10 +518,5 @@ namespace PowerpointGenerater2
                 File.Delete(TempLiturgiePath);
         }
         #endregion functies
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

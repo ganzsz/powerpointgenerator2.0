@@ -109,9 +109,35 @@ namespace PowerpointGenerater2
                                         shape.Table.Rows.Add(2);
                                     }
                                     shape.Table.Rows[2].Cells[1].Shape.TextFrame.TextRange.Text = t.bordregel[0];
-                                    shape.Table.Rows[2].Cells[2].Shape.TextFrame.TextRange.Text = t.bordregel[1];
-                                    shape.Table.Rows[2].Cells[3].Shape.TextFrame.TextRange.Text = t.bordregel[2];
-                                    shape.Table.Rows[2].Cells[4].Shape.TextFrame.TextRange.Text = t.bordregel[3];
+                                    
+                                    if (papa.instellingen.dubbelePuntKolom)
+                                    {
+                                        if (shape.Table.Rows[2].Cells.Count >= 4)
+                                        {
+                                            shape.Table.Rows[2].Cells[2].Shape.TextFrame.TextRange.Text = t.bordregel[1];
+                                            shape.Table.Rows[2].Cells[3].Shape.TextFrame.TextRange.Text = t.bordregel[2];
+                                            shape.Table.Rows[2].Cells[4].Shape.TextFrame.TextRange.Text = t.bordregel[3];
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("De liturgietabel in " + regel.ToString() + " heeft geen 4 kolommen op de tweede rij");
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (shape.Table.Rows[2].Cells.Count >= 3)
+                                        {
+                                            shape.Table.Rows[2].Cells[2].Shape.TextFrame.TextRange.Text = t.bordregel[1] + t.bordregel[2];
+                                            shape.Table.Rows[2].Cells[3].Shape.TextFrame.TextRange.Text = t.bordregel[3];
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("De liturgietabel in " + regel.ToString() + " heeft geen 3 kolommen op de tweede rij");
+                                            break;
+                                        }
+                                    }
+                                    
                                 }
                             }
                             if (!papa.textBox5.Text.Equals(""))

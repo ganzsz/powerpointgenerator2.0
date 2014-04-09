@@ -12,6 +12,7 @@ namespace PowerpointGenerater2
         public int regelsperslide = 6;
         private List<Mapmask> lijstmasks = new List<Mapmask>();
         public string TemplateAbeeldingLied;
+        public bool dubbelePuntKolom = false;
 
         public Instellingen()
             : this("", "", "",6)
@@ -71,6 +72,9 @@ namespace PowerpointGenerater2
                         xw.WriteEndElement();
                         xw.WriteStartElement("AfbeeldingLied");
                             xw.WriteString(instellingen.TemplateAbeeldingLied.ToString());
+                        xw.WriteEndElement();
+                        xw.WriteStartElement("dubbelePuntKolom");
+                            xw.WriteString((instellingen.dubbelePuntKolom?"1":"0"));
                         xw.WriteEndElement();
                     xw.WriteEndElement();
                 xw.WriteEndDocument();
@@ -144,7 +148,9 @@ namespace PowerpointGenerater2
             nodelist = root.GetElementsByTagName("AfbeeldingLied");
             foreach (XmlNode item in nodelist)
                 instellingen.TemplateAbeeldingLied = item.InnerText;
-            
+            nodelist = root.GetElementsByTagName("dubbelePuntKolom");
+            foreach (XmlNode item in nodelist)
+                instellingen.dubbelePuntKolom = item.InnerText == "1";
             return instellingen;
         }
 

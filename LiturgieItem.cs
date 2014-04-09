@@ -24,9 +24,12 @@ namespace PowerpointGenerater2
         public List<int> verzen = new List<int>();
         public string presentatiepad = "";
 
+        private string tos = "NULL";
+
         public LiturgieItem(string regel, Form1 pa)
         {
             this.papa = pa;
+            this.tos = regel;
             List<string> onderdelen = new List<string>();
             char[] sep = { ' ', ':' };
             foreach (string s in regel.Split(sep, 3))
@@ -161,6 +164,11 @@ namespace PowerpointGenerater2
                 MessageBox.Show('"' + regel + "\" is niet gevonden.");
                 return;
             }
+        }
+
+        public override string ToString()
+        {
+            return this.tos;
         }
     }
 }

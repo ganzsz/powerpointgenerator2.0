@@ -45,6 +45,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -205,11 +206,22 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Afbeelding Liederen Template: ";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 192);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(242, 17);
+            this.checkBox1.TabIndex = 17;
+            this.checkBox1.Text = "Dubbele punt in aparte kolom op liturgiebordje";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Instellingenform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox5);
@@ -252,5 +264,6 @@
         public System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.CheckBox checkBox1;
     }
 }

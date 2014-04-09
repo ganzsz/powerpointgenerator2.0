@@ -14,6 +14,7 @@ namespace PowerpointGenerater2
             textBox3.Text = formulier.instellingen.Databasepad;
             textBox4.Text = formulier.instellingen.regelsperslide.ToString();
             textBox5.Text = formulier.instellingen.TemplateAbeeldingLied;
+            checkBox1.Checked = formulier.instellingen.dubbelePuntKolom;
             hoofdformulier = formulier;
         }
 
@@ -74,6 +75,5 @@ namespace PowerpointGenerater2
             if (!temp.Equals(""))
                 textBox5.Text = temp;
         }
-
     }
 }
