@@ -43,6 +43,10 @@ local.properties
 
 # Build results
 
+[Bb]in/comp.bat
+[Bb]in/version.txt
+[Bb]in/zipper.exe
+[Bb]in/*.zip
 [Dd]ebug/
 [Rr]elease/
 x64/
