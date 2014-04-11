@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace PowerpointGenerater2
 {
@@ -31,11 +32,35 @@ namespace PowerpointGenerater2
             this.papa = pa;
             this.tos = regel;
             List<string> onderdelen = new List<string>();
-            char[] sep = { ' ', ':' };
-            foreach (string s in regel.Split(sep, 3))
+            string[] verstemp = regel.Split(':');
+            if (verstemp.Count() > 1)
             {
-                if (!s.Equals(""))
-                    onderdelen.Add(s);
+                if (verstemp[0].Split(' ').Count() > 1)
+                {
+                    onderdelen.Add(verstemp[0].Split(' ')[0]);
+                    onderdelen.Add(verstemp[0].Split(' ')[1]);
+                    onderdelen.Add(verstemp[1]);
+                }
+                else
+                {
+                    this.isValid = false;
+                }
+            }
+            else
+            {
+                char[] sep = {' ' };
+                foreach (string s in regel.Split(sep, 2))
+                {
+                    if (!s.Equals(""))
+                        onderdelen.Add(s);
+                }
+            }
+            /*
+             * Als er verzen zijn, spaties wegwerken ivm werking
+             */
+            if (onderdelen.Count > 2)
+            {
+                onderdelen[2] = Regex.Replace(onderdelen[2], " +", "", RegexOptions.Compiled);
             }
             #region Zang
             if (onderdelen.Count() > 1 && onderdelen[0].ToLower() != "lezen" && onderdelen[0].ToLower() != "tekst")
@@ -93,6 +118,7 @@ namespace PowerpointGenerater2
                     this.bordregel[1] = onderdelen[1];
                     this.bordregel[2] = ":";
                     this.bordregel[3] = onderdelen[2];
+                    this.bordregel[3] = Regex.Replace(this.bordregel[3], ",+", ", ");
                 }
                 else
                 {
