@@ -48,7 +48,7 @@ namespace PowerpointGenerater2
             }
             else
             {
-                char[] sep = {' ' };
+                char[] sep = {' '};
                 foreach (string s in regel.Split(sep, 2))
                 {
                     if (!s.Equals(""))
@@ -65,6 +65,23 @@ namespace PowerpointGenerater2
             #region Zang
             if (onderdelen.Count() > 1 && onderdelen[0].ToLower() != "lezen" && onderdelen[0].ToLower() != "tekst")
             {
+                string regelt = onderdelen[0].ToLower();
+                switch (regelt)
+                {
+                    case "ps":
+                        onderdelen[0] = "psalm";
+                        break;
+                    case "gz":
+                        onderdelen[0] = "gezang";
+                        break;
+                    case "opw":
+                        onderdelen[0] = "opwekking";
+                        break;
+                    case "ld":
+                    case "lb":
+                        onderdelen[0] = "lied";
+                        break;
+                }
                 string psalmmap = papa.instellingen.Databasepad + @"\" + onderdelen[0] + @"\" + onderdelen[1].ToLower();
                 if (Directory.Exists(psalmmap))
                 {
