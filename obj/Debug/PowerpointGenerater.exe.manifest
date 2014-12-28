@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Powerpoint-Overlay-icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerpointGenerater" version="2.3.5252.34877" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="PowerpointGenerater" version="2.3.5475.20543" language="neutral" processorArchitecture="msil" />
     <commandLine file="PowerpointGenerater.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -61,13 +61,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerpointGenerater.exe" size="1736704">
-      <assemblyIdentity name="PowerpointGenerater" version="2.3.5252.34877" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="PowerpointGenerater" version="2.3.5475.20543" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>GPb31TXZlnBfpVfyVnGdF5rnXQI=</dsig:DigestValue>
+        <dsig:DigestValue>dAK/7I7OEXgC9tl2mVFA21/D6h0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

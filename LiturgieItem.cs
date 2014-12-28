@@ -95,7 +95,7 @@ namespace PowerpointGenerater2
                             {
                                 for (int i = Int32.Parse(vers.Split('-')[0]); i <= Int32.Parse(vers.Split('-')[vers.Split('-').Count() - 1]); i++)
                                 {
-                                    if (File.Exists(psalmmap + @"\" + i + @".txt") || File.Exists(psalmmap + @"\" + i + @".gif"))
+                                    if (File.Exists(psalmmap + @"\" + i + @".txt") || File.Exists(psalmmap + @"\" + i + @"-1.gif"))
                                         verzen.Add(i);
                                     else
                                         this.isValid = false;
