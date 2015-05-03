@@ -195,7 +195,10 @@ namespace PowerpointGenerater2
                     #endregion lezen;
                     else
                     {
-                        this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
+                        if (!papa.instellingen.getMask(onderdelen[0]).Equals(""))
+                            this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
+                        else
+                            this.Aansluitend = "";
                     }
                 }
                 else
