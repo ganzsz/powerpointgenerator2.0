@@ -48,7 +48,26 @@ namespace PowerpointGenerater2
             lijstmasks.Clear();
         }
 
+        /// <summary>
+        /// Rewrite instellingen files, warning this will wipe your masks file
+        /// if you don't want that to happen run WriteXML(Instellingen, path, false)
+        /// </summary>
+        /// <param name="instellingen">instellingen object to use</param>
+        /// <param name="path">path to dir where to find instellingen.xml</param>
+        /// <returns></returns>
         public static bool WriteXML(Instellingen instellingen, string path)
+        {
+            return Instellingen.WriteXML(instellingen, path, true);
+        }
+
+        /// <summary>
+        /// Rewrite the xml settings file(s)
+        /// </summary>
+        /// <param name="instellingen">Instance of instellingen object to write</param>
+        /// <param name="path">the path to the folder where to find instellingen.xml</param>
+        /// <param name="rewriteMasks">should masks be overwritten too?</param>
+        /// <returns>success?</returns>
+        public static bool WriteXML(Instellingen instellingen, string path, bool rewriteMasks)
         {
             try
             {
@@ -85,28 +104,29 @@ namespace PowerpointGenerater2
 
                 xw.Flush();
                 xw.Close();
-
-                //schrijf Masks weg
-                xw = XmlWriter.Create(path + "masks.xml", xws);
-                xw.WriteStartDocument();
-                xw.WriteStartElement("Masks");
-                foreach (Mapmask mask in instellingen.lijstmasks)
+                if (rewriteMasks)
                 {
-                    xw.WriteStartElement("Mask");
-                    xw.WriteStartElement("Name");
-                    xw.WriteString(mask.Name);
+                    //schrijf Masks weg
+                    xw = XmlWriter.Create(path + "masks.xml", xws);
+                    xw.WriteStartDocument();
+                    xw.WriteStartElement("Masks");
+                    foreach (Mapmask mask in instellingen.lijstmasks)
+                    {
+                        xw.WriteStartElement("Mask");
+                        xw.WriteStartElement("Name");
+                        xw.WriteString(mask.Name);
+                        xw.WriteEndElement();
+                        xw.WriteStartElement("RealName");
+                        xw.WriteString(mask.RealName);
+                        xw.WriteEndElement();
+                        xw.WriteEndElement();
+                    }
                     xw.WriteEndElement();
-                    xw.WriteStartElement("RealName");
-                    xw.WriteString(mask.RealName);
-                    xw.WriteEndElement();
-                    xw.WriteEndElement();
+                    xw.WriteEndDocument();
+
+                    xw.Flush();
+                    xw.Close();
                 }
-                xw.WriteEndElement();
-                xw.WriteEndDocument();
-
-                xw.Flush();
-                xw.Close();
-
                 return true;
             }
             catch (PathTooLongException)

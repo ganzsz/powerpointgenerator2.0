@@ -176,14 +176,16 @@ namespace PowerpointGenerater2
                 instellingen.Templatetheme = formulier.textBox2.Text;
                 instellingen.Databasepad = formulier.textBox3.Text;
                 instellingen.TemplateAbeeldingLied = formulier.textBox5.Text;
+                instellingen.maskPath = formulier.textBox6.Text;
                 bool result = System.Int32.TryParse(formulier.textBox4.Text, out instellingen.regelsperslide);
                 if (!result)
                 {
                     instellingen.regelsperslide = 6;
                 }
                 instellingen.dubbelePuntKolom = formulier.checkBox1.Checked;
-                if (!Instellingen.WriteXML(instellingen, ProgramDirectory))
+                if (!Instellingen.WriteXML(instellingen, ProgramDirectory, false))
                     MessageBox.Show("Error, oeps");
+                instellingen = Instellingen.LoadXML(ProgramDirectory);
             }
         }
         private void bekijkDatabaseToolStripMenuItem1_Click(object sender, EventArgs e)

@@ -46,6 +46,9 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +85,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.button2.Location = new System.Drawing.Point(184, 211);
+            this.button2.Location = new System.Drawing.Point(184, 258);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 39);
             this.button2.TabIndex = 4;
@@ -93,7 +96,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.Location = new System.Drawing.Point(5, 211);
+            this.button3.Location = new System.Drawing.Point(5, 258);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 39);
             this.button3.TabIndex = 5;
@@ -163,7 +166,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 171);
+            this.label4.Location = new System.Drawing.Point(2, 216);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(88, 13);
             this.label4.TabIndex = 12;
@@ -171,7 +174,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(96, 171);
+            this.textBox4.Location = new System.Drawing.Point(96, 213);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(131, 20);
             this.textBox4.TabIndex = 13;
@@ -209,18 +212,51 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 192);
+            this.checkBox1.Location = new System.Drawing.Point(5, 232);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(242, 17);
             this.checkBox1.TabIndex = 17;
             this.checkBox1.Text = "Dubbele punt in aparte kolom op liturgiebordje";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(233, 187);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(38, 20);
+            this.button7.TabIndex = 20;
+            this.button7.Text = "...";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.Location = new System.Drawing.Point(5, 187);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(222, 20);
+            this.textBox6.TabIndex = 19;
+            this.textBox6.Text = "Path";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(2, 171);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(127, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Pad naar masksbestand: ";
+            // 
             // Instellingenform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 309);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button6);
@@ -265,5 +301,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button7;
+        public System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label6;
     }
 }

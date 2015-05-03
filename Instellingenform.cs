@@ -14,6 +14,7 @@ namespace PowerpointGenerater2
             textBox3.Text = formulier.instellingen.Databasepad;
             textBox4.Text = formulier.instellingen.regelsperslide.ToString();
             textBox5.Text = formulier.instellingen.TemplateAbeeldingLied;
+            textBox6.Text = formulier.instellingen.maskPath;
             checkBox1.Checked = formulier.instellingen.dubbelePuntKolom;
             hoofdformulier = formulier;
         }
@@ -47,17 +48,34 @@ namespace PowerpointGenerater2
 
             textBox3.Text = openFolderDialog1.SelectedPath;
         }
+        
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //kies een bestand en sla het pad op
+            String temp = KiesFile("Masks bestand|*.xml");
+            if (!temp.Equals(""))
+                textBox6.Text = temp;
+        }
         #endregion Eventhandlers
         #region Functions
         /// <summary>
+        /// Kiesfile met een PowerPoint template bestand
+        /// </summary>
+        /// <returns>Het gekozen bestandspad</returns>
+        private string KiesFile()
+        {
+            return this.KiesFile("Template bestanden|*.pptx;*.potx");
+        }
+        /// <summary>
         /// Uitkiezen van een file aan de hand van openfiledialog
         /// </summary>
+        /// <param name="type">Het type bestand: "Template bestanden|*.pptx;*.potx"</param>
         /// <returns> return gekozen bestandspad</returns>
-        private String KiesFile()
+        private String KiesFile(string type)
         {
             //open een open window met bepaalde instellingen
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Template bestanden|*.pptx;*.potx";
+            openFileDialog1.Filter = type;
             openFileDialog1.Title = "Kies bestand";
 
             //return als er word geannuleerd
@@ -66,6 +84,7 @@ namespace PowerpointGenerater2
             //return bestandspad
             return openFileDialog1.FileName;
         }
+
         #endregion Functions
 
         private void button6_Click(object sender, EventArgs e)
@@ -75,5 +94,7 @@ namespace PowerpointGenerater2
             if (!temp.Equals(""))
                 textBox5.Text = temp;
         }
+
+        
     }
 }
