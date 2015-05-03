@@ -220,8 +220,9 @@ namespace PowerpointGenerater2
         /// <param name="q">The verses position</param>
         /// <param name="i">The actual verse number</param>
         /// <param name="v">The image that is put in the presentation</param>
+        /// <param name="last" type="bool">Is this the last dia of the verse</param>
         /// <returns>The presentation but with the images</returns>
-        public _Presentation liedAfbeeldingPresentatie(_Presentation presentatie, LiturgieItem regel, int r, int q, int i, int v)
+        public _Presentation liedAfbeeldingPresentatie(_Presentation presentatie, LiturgieItem regel, int r, int q, int i, int v, bool last)
         {
             foreach (Slide slide in presentatie.Slides)
             {
@@ -243,7 +244,7 @@ namespace PowerpointGenerater2
                                 }
                                 break;
                             case "<Volgende>":
-                                if (r < this.items.Count - 1 && q == regel.verzen.Count - 1)
+                                if (last && r < this.items.Count - 1 && q == regel.verzen.Count - 1)
                                     shape.TextFrame.TextRange.Text = this.items[(r + 1)].Aansluitend;
                                 else
                                     shape.TextFrame.TextRange.Text = "";
@@ -287,6 +288,14 @@ namespace PowerpointGenerater2
                         #region liedafbeelding
                         if (File.Exists(regel.psalmmap + '\\' + i + @"-1.gif"))
                         {
+                            int laatsteDiaCount = 0;
+                            for (int v = 1; v < 100; v++)
+                            {
+                                if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
+                                {
+                                    laatsteDiaCount = v;
+                                }
+                            }
                             for (int v = 1; v < 100; v++)
                             {
                                 if (File.Exists(regel.psalmmap + '\\' + i + @"-" + v + ".gif"))
@@ -294,7 +303,7 @@ namespace PowerpointGenerater2
                                     if (File.Exists(papa.instellingen.TemplateAbeeldingLied))
                                     {
                                         presentatie = OpenPPS(papa.instellingen.TemplateAbeeldingLied);
-                                        presentatie = this.liedAfbeeldingPresentatie(presentatie, regel, r, q, i, v);
+                                        presentatie = this.liedAfbeeldingPresentatie(presentatie, regel, r, q, i, v, (v==laatsteDiaCount));
                                     }
                                     else
                                     {
@@ -308,7 +317,7 @@ namespace PowerpointGenerater2
                                 }
                                 else
                                 {
-                                    continue;
+                                    break;
                                 }
                             }
                         }
