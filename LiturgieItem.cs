@@ -65,8 +65,8 @@ namespace PowerpointGenerater2
             #region Zang
             if (onderdelen.Count() > 1 && onderdelen[0].ToLower() != "lezen" && onderdelen[0].ToLower() != "tekst")
             {
-                string regelt = onderdelen[0].ToLower();
-                switch (regelt)
+                string mapnaam = onderdelen[0].ToLower();
+                switch (mapnaam)
                 {
                     case "ps":
                         onderdelen[0] = "psalm";
