@@ -25,12 +25,12 @@ namespace PowerpointGenerater2
         public List<int> verzen = new List<int>();
         public string presentatiepad = "";
 
-        private string tos = "NULL";
+        private string tostring = "NULL";
 
         public LiturgieItem(string regel, Form1 pa)
         {
             this.papa = pa;
-            this.tos = regel;
+            this.tostring = regel;
             List<string> onderdelen = new List<string>();
             string[] verstemp = regel.Split(':');
             if (verstemp.Count() > 1)
@@ -214,7 +214,7 @@ namespace PowerpointGenerater2
 
         public override string ToString()
         {
-            return this.tos;
+            return this.tostring;
         }
     }
 }
