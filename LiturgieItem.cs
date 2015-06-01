@@ -48,7 +48,7 @@ namespace PowerpointGenerater2
             }
             else
             {
-                char[] sep = {' '};
+                char[] sep = { ' ' };
                 foreach (string s in regel.Split(sep, 2))
                 {
                     if (!s.Equals(""))
@@ -130,6 +130,7 @@ namespace PowerpointGenerater2
 
                 this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
+                onderdelen[1] = papa.instellingen.getMask(onderdelen[1]);
                 if (onderdelen.Count() > 2)
                 {
                     this.bordregel[1] = onderdelen[1];
@@ -177,8 +178,8 @@ namespace PowerpointGenerater2
 
                             if (regelnummer <= el.Lines.Count() && regelnummer > 0)
                             {
-                                this.Titel = el.Lines[regelnummer-1];
-                                this.Aansluitend = "Aansluitend: "+papa.instellingen.getMask(onderdelen[0]) + ": " + this.Titel;
+                                this.Titel = el.Lines[regelnummer - 1];
+                                this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + ": " + this.Titel;
                             }
                             else
                             {
@@ -196,7 +197,7 @@ namespace PowerpointGenerater2
                     else
                     {
                         if (!papa.instellingen.getMask(onderdelen[0]).Equals(""))
-                            this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]);
+                            this.Aansluitend = "Aansluitend: " + Regex.Replace(papa.instellingen.getMask(onderdelen[0]), "_", " ");
                         else
                             this.Aansluitend = "";
                     }
