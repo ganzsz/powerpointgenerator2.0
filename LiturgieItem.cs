@@ -130,7 +130,7 @@ namespace PowerpointGenerater2
 
                 this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
-                onderdelen[1] = papa.instellingen.getMask(onderdelen[1]);
+                onderdelen[1] = Regex.Replace(papa.instellingen.getMask(onderdelen[1]), "_", " ");
                 if (onderdelen.Count() > 2)
                 {
                     this.bordregel[1] = onderdelen[1];
@@ -148,13 +148,12 @@ namespace PowerpointGenerater2
                 this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (onderdelen.Count() > 2)
                     this.Aansluitend += ": " + bordregel[3];
-                //this.Aansluitend = "Aansluitend: " + papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1] + ": ";
                 this.Titel = papa.instellingen.getMask(onderdelen[0]) + " " + onderdelen[1];
                 if (!eenvers)
                     this.Titel += ": ";
             }
-            else
             #endregion
+            else
             {
                 System.Diagnostics.Debug.WriteLine(papa.instellingen.Databasepad + @"\" + onderdelen[0] + @".pptx");
                 if (File.Exists(papa.instellingen.Databasepad + @"\" + onderdelen[0] + @".pptx"))
