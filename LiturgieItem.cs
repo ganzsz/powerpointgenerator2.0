@@ -23,6 +23,8 @@ namespace PowerpointGenerater2
 
         public string psalmmap;
         public List<int> verzen = new List<int>();
+        public List<String> wisselzang = new List<String>();
+        
         public string presentatiepad = "";
 
         private string tostring = "NULL";
@@ -89,8 +91,26 @@ namespace PowerpointGenerater2
                     this.isLied = true;
                     if (onderdelen.Count > 2)
                     {
-                        foreach (string vers in onderdelen[2].Split(','))
+                        foreach (string fresh in onderdelen[2].Split(','))
                         {
+                            //fresh is zodat ik hem later kan veranderen
+                            if(Regex.IsMatch(fresh,".*m.*"))
+                            {
+                                wisselzang.Add("Mannen");
+                            }
+                            else if(Regex.IsMatch(fresh,".*v.*"))
+                            {
+                                wisselzang.Add("Vrouwen");
+                            }
+                            else if (Regex.IsMatch(fresh, ".*a.*"))
+                            {
+                                wisselzang.Add("Allen");
+                            }
+                            else
+                            {
+                                wisselzang.Add("");
+                            }
+                            String vers = Regex.Match(fresh,@"\d+").Value;
                             if (vers.Split('-').Count() > 1)
                             {
                                 for (int i = Int32.Parse(vers.Split('-')[0]); i <= Int32.Parse(vers.Split('-')[vers.Split('-').Count() - 1]); i++)
@@ -128,6 +148,7 @@ namespace PowerpointGenerater2
                     this.isValid = false;
                 }
 
+                onderdelen[2] = Regex.Replace(onderdelen[2], @"[a-z]+", "");
                 this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
                 onderdelen[1] = Regex.Replace(papa.instellingen.getMask(onderdelen[1]), "_", " ");

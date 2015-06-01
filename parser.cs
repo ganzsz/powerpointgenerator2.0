@@ -188,7 +188,7 @@ namespace PowerpointGenerater2
         /// <param name="r">The counter in this.items</param>
         /// <param name="q">The verses position</param>
         /// <param name="i">The actual verse number</param>
-        /// <param name="regel">The songtext that has to be put in</param>
+        /// <param name="regels">The songtext that has to be put in</param>
         /// <returns>The presentation but with the text and other elements</returns>
         public _Presentation tekstLied(_Presentation presentatie, LiturgieItem regel, int r, int q, int i, string regels)
         {
@@ -221,6 +221,9 @@ namespace PowerpointGenerater2
                                 break;
                             case "<Inhoud>":
                                 shape.TextFrame.TextRange.Text = regels;
+                                break;
+                            case "<Wisselzang>":
+                                shape.TextFrame.TextRange.Text = regel.wisselzang[q];
                                 break;
                         }
                     }
@@ -281,6 +284,9 @@ namespace PowerpointGenerater2
                                     break;
                                 break;
                             case "<Inhoud>":
+                                break;
+                            case "<Wisselzang>":
+                                shape.TextFrame.TextRange.Text = regel.wisselzang[q];
                                 break;
                         }
                     }
