@@ -24,7 +24,7 @@ namespace PowerpointGenerater2
         public string psalmmap;
         public List<int> verzen = new List<int>();
         public List<String> wisselzang = new List<String>();
-        
+
         public string presentatiepad = "";
 
         private string tostring = "NULL";
@@ -91,40 +91,47 @@ namespace PowerpointGenerater2
                     this.isLied = true;
                     if (onderdelen.Count > 2)
                     {
-                        foreach (string fresh in onderdelen[2].Split(','))
+                        foreach (string vers in onderdelen[2].Split(','))
                         {
-                            //fresh is zodat ik hem later kan veranderen
-                            if(Regex.IsMatch(fresh,".*m.*"))
-                            {
-                                wisselzang.Add("Mannen");
-                            }
-                            else if(Regex.IsMatch(fresh,".*v.*"))
-                            {
-                                wisselzang.Add("Vrouwen");
-                            }
-                            else if (Regex.IsMatch(fresh, ".*a.*"))
-                            {
-                                wisselzang.Add("Allen");
-                            }
-                            else
-                            {
-                                wisselzang.Add("");
-                            }
-                            String vers = Regex.Match(fresh,@"\d+").Value;
                             if (vers.Split('-').Count() > 1)
                             {
                                 for (int i = Int32.Parse(vers.Split('-')[0]); i <= Int32.Parse(vers.Split('-')[vers.Split('-').Count() - 1]); i++)
                                 {
                                     if (File.Exists(psalmmap + @"\" + i + @".txt") || File.Exists(psalmmap + @"\" + i + @"-1.gif"))
+                                    {
                                         verzen.Add(i);
+                                        wisselzang.Add("");
+                                    }
                                     else
                                         this.isValid = false;
                                 }
                             }
                             else
                             {
-                                if (File.Exists(psalmmap + @"\" + vers + @".txt") || File.Exists(psalmmap + @"\" + vers + @"-1.gif"))
-                                    verzen.Add(Int32.Parse(vers));
+                                string fresh = Regex.Match(vers, @"\d+").Value;
+                                if (File.Exists(psalmmap + @"\" + fresh + @".txt") || File.Exists(psalmmap + @"\" + fresh + @"-1.gif"))
+                                {
+                                    
+                                    
+                                    if (Regex.IsMatch(vers, ".*m.*"))
+                                    {
+                                        wisselzang.Add("Mannen");
+                                    }
+                                    else if (Regex.IsMatch(vers, ".*v.*"))
+                                    {
+                                        wisselzang.Add("Vrouwen");
+                                    }
+                                    else if (Regex.IsMatch(vers, ".*a.*"))
+                                    {
+                                        wisselzang.Add("Allen");
+                                    }
+                                    else
+                                    {
+                                        wisselzang.Add("");
+                                    }
+                                    
+                                    verzen.Add(Int32.Parse(fresh));
+                                }
                                 else
                                     this.isValid = false;
                             }
@@ -135,7 +142,10 @@ namespace PowerpointGenerater2
                         for (int i = 1; i < 100; i++)
                         {
                             if (File.Exists(psalmmap + @"\" + i + @".txt") || File.Exists(psalmmap + @"\" + i + @"-1.gif"))
+                            {
                                 verzen.Add(i);
+                                wisselzang.Add("");
+                            }
                             else
                                 break;
                         }
@@ -148,12 +158,13 @@ namespace PowerpointGenerater2
                     this.isValid = false;
                 }
 
-                onderdelen[2] = Regex.Replace(onderdelen[2], @"[a-z]+", "");
+
                 this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
                 onderdelen[1] = Regex.Replace(papa.instellingen.getMask(onderdelen[1]), "_", " ");
                 if (onderdelen.Count() > 2)
                 {
+                    onderdelen[2] = Regex.Replace(onderdelen[2], @"[a-z]+", "");
                     this.bordregel[1] = onderdelen[1];
                     this.bordregel[2] = ":";
                     this.bordregel[3] = onderdelen[2];
