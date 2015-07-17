@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LezenMask.cs" />
     <Compile Include="Contactform.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -14,7 +14,6 @@ namespace PowerpointGenerater2
         public string Aansluitend = "";
 
         public bool isValid = true;
-
         public bool bordje = false;
         public string[] bordregel = new string[4];
         private Form1 papa;
@@ -31,6 +30,8 @@ namespace PowerpointGenerater2
 
         public LiturgieItem(string regel, Form1 pa)
         {
+            //TODO Debug init of LezenMask
+            LezenMask lezenMask = new LezenMask("Lezen","tekst","lezenbgt");
             this.papa = pa;
             this.tostring = regel;
             List<string> onderdelen = new List<string>();
@@ -65,7 +66,7 @@ namespace PowerpointGenerater2
                 onderdelen[2] = Regex.Replace(onderdelen[2], " +", "", RegexOptions.Compiled);
             }
             #region Zang
-            if (onderdelen.Count() > 1 && onderdelen[0].ToLower() != "lezen" && onderdelen[0].ToLower() != "tekst")
+            if (onderdelen.Count() > 1 && !lezenMask.Contains(onderdelen[0]))
             {
                 string mapnaam = onderdelen[0].ToLower();
                 switch (mapnaam)
@@ -192,10 +193,10 @@ namespace PowerpointGenerater2
                 {
                     this.presentatiepad = papa.instellingen.Databasepad + @"\" + onderdelen[0].ToLower() + @".pptx";
                     #region lezen
-                    if (onderdelen[0].ToLower() == "lezen" || onderdelen[0].ToLower() == "tekst")
+                    if (lezenMask.Contains(onderdelen[0]))
                     {
                         RichTextBox el;
-                        if (onderdelen[0].ToLower() == "lezen")
+                        if (lezenMask.getType(onderdelen[0]) == "lezen")
                         {
                             el = papa.textBox1;
                         }
