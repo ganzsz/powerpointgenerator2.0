@@ -31,7 +31,10 @@ namespace PowerpointGenerater2
         public LiturgieItem(string regel, Form1 pa)
         {
             //TODO Debug init of LezenMask
-            LezenMask lezenMask = new LezenMask("Lezen","tekst","lezenbgt");
+            LezenMask lezenMask = new LezenMask();
+            lezenMask.addMask("lezen", "lezen");
+            lezenMask.addMask("lezenbgt", "lezen");
+            lezenMask.addMask("lezennbv", "lezen");
             this.papa = pa;
             this.tostring = regel;
             List<string> onderdelen = new List<string>();

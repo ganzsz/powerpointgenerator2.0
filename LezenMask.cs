@@ -10,19 +10,29 @@ namespace PowerpointGenerater2
         /// <summary>
         /// The lezen-type name
         /// </summary>
-        private string[] masks;
+        private List<string> masks = new List<string>();
         /// <summary>
         /// is it lezen or tekst
         /// </summary>
-        private string[] type;
+        private List<string> type = new List<string>();
 
+        public LezenMask() { }
+ 
         /// <summary>
-        /// Constructor with only an array of names
+        /// constructor
         /// </summary>
-        /// <param name="names">The names to use as lezen-type dias</param>
-        public LezenMask(params string[] names)
+        /// <param name="names">the names of the things</param>
+        /// <param name="types">the types of corresponding names</param>
+        public LezenMask(string[] names, string[] types)
         {
-            this.masks = names;
+            this.masks = names.ToList();
+            this.type = types.ToList();
+        }
+
+        public void addMask(string name, string type)
+        {
+            this.masks.Add(name);
+            this.type.Add(type);
         }
 
         /// <summary>
