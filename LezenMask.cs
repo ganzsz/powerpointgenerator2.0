@@ -31,7 +31,7 @@ namespace PowerpointGenerater2
 
         public void addMask(string name, string type)
         {
-            this.masks.Add(name);
+            this.masks.Add(name.ToLower());
             this.type.Add(type);
         }
 
@@ -42,7 +42,7 @@ namespace PowerpointGenerater2
         /// <returns>true when the name is a lezen-type command, else false</returns>
         public bool Contains(string name)
         {
-            return masks.Contains(name);
+            return masks.Contains(name.ToLower());
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace PowerpointGenerater2
         {
             for (int counter = 0; counter < this.masks.Count(); counter++)
             {
-                if (this.masks[counter] == name)
+                if (this.masks[counter].ToLower() == name.ToLower())
                 {
                     return counter;
                 }

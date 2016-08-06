@@ -35,6 +35,9 @@ namespace PowerpointGenerater2
             lezenMask.addMask("lezen", "lezen");
             lezenMask.addMask("lezenbgt", "lezen");
             lezenMask.addMask("lezennbv", "lezen");
+            lezenMask.addMask("tekstnbv", "tekst");
+            lezenMask.addMask("tekstbgt", "tekst");
+            lezenMask.addMask("tekst", "tekst");
             this.papa = pa;
             this.tostring = regel;
             List<string> onderdelen = new List<string>();
@@ -162,8 +165,8 @@ namespace PowerpointGenerater2
                     this.isValid = false;
                 }
 
-
-                this.bordje = true;
+                if(this.bordregel[0].ToLower()!="zondag")
+                    this.bordje = true;
                 this.bordregel[0] = papa.instellingen.getMask(onderdelen[0]);
                 onderdelen[1] = Regex.Replace(papa.instellingen.getMask(onderdelen[1]), "_", " ");
                 if (onderdelen.Count() > 2)
